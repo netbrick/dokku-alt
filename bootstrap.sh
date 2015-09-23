@@ -2,7 +2,7 @@
 
 set -xe
 
-DEBIAN_CODE_NAME=`lsb_release -sr`
+DEBIAN_CODE_NAME=`lsb_release -sc`
 
 if [ ! -e /usr/lib/apt/methods/https ]; then
 	apt-get update

@@ -2,14 +2,14 @@
 
 set -xe
 
-sudo add-apt-repository ppa:nginx/stable -y
-sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
-sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
-sudo apt-get update
-sudo mkdir -p /var/lib/docker
-echo exit 101 | sudo tee /usr/sbin/policy-rc.d
-sudo chmod +x /usr/sbin/policy-rc.d
-sudo apt-get install -y slirp lxc-docker aufs-tools cgroup-lite \
+wget http://nginx.org/keys/nginx_signing.key -O - | apt-key add -
+wget -qO- https://get.docker.com/gpg | sudo apt-key add -
+wget -qO- https://get.docker.com/ | sh
+apt-get update
+mkdir -p /var/lib/docker
+echo exit 101 | tee /usr/sbin/policy-rc.d
+chmod +x /usr/sbin/policy-rc.d
+apt-get install -y slirp lxc-docker aufs-tools cgroup-lite \
 	apt-transport-https locales git make \
 	curl software-properties-common \
 	nginx dnsutils aufs-tools \
@@ -19,5 +19,5 @@ curl -sLo linux https://github.com/jpetazzo/sekexe/raw/master/uml
 chmod +x linux
 
 if mount | grep /dev/shm | grep noexec; then
-	sudo mount -o remount,exec /dev/shm
+	mount -o remount,exec /dev/shm
 fi

@@ -7,8 +7,9 @@ if [ ! -e /usr/lib/apt/methods/https ]; then
 	apt-get install -y apt-transport-https
 fi
 
-echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
-echo deb https://dokku-alt.github.io/dokku-alt / > /etc/apt/sources.list.d/dokku-alt.list
+wget -qO- https://get.docker.com/gpg | sudo apt-key add -
+wget -qO- https://get.docker.com/ | sh
+echo deb https://netbrick.github.io/dokku-alt / > /etc/apt/sources.list.d/dokku-alt.list
 
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
 apt-key adv --keyserver keys.gnupg.net --recv-keys EAD883AF
@@ -24,10 +25,16 @@ fi
 
 set +xe
 
-if [ `lsb_release -sr` != "14.04" ]; then
-	echo
-	echo "WARNING: dokku-alt works best on Ubuntu 14.04 LTS!"
-fi
+case `lsb_release -sr` in
+    wheezy|jessie)
+    	echo
+	    echo "OK: You made right decision - Debian"
+        ;;
+    *)
+        echo
+        echo "WARNING: dokku-deb-al works best on Debain"
+        ;;
+esac
 
 echo
 echo "Almost done!"

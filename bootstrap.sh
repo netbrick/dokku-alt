@@ -20,12 +20,13 @@ esac
 
 wget -qO- https://get.docker.com/gpg | sudo apt-key add -
 wget -qO- https://get.docker.com/ | sh
-echo deb https://netbrick.github.io/dokku-alt / > /etc/apt/sources.list.d/dokku-alt.list
+#echo deb https://netbrick.github.io/dokku-alt / > /etc/apt/sources.list.d/dokku-alt.list
 
 apt-get update -y
 
 if [[ -t 0 ]]; then
-	apt-get install -y dokku-alt ruby ruby-sinatra
+	dpkg -i dokku-alt-0.3.10-147-g43154de-amd64.deb
+	apt-get install -y ruby ruby-sinatra
 else
 	unset UCF_FORCE_CONFFOLD
 	export UCF_FORCE_CONFFNEW=YES

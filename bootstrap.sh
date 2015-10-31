@@ -20,9 +20,10 @@ esac
 
 wget -qO- https://get.docker.com/gpg | sudo apt-key add -
 wget -qO- https://get.docker.com/ | sh
-#echo deb https://netbrick.github.io/dokku-alt / > /etc/apt/sources.list.d/dokku-alt.list
 
 apt-get update -y
+wget http://debian.netbrick.cz/debian.netbrick.cz.gpg.key -O - | apt-key add -
+echo deb http://debian.netbrick.cz/ jessie main > /etc/apt/sources.list.d/netbrick.list
 
 if [[ -t 0 ]]; then
 	dpkg -i dokku-alt-0.3.10-147-g43154de-amd64.deb
